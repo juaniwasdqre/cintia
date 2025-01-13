@@ -8,6 +8,8 @@
 <body>
     <?php
     
+    $nombres
+
     ?>
     <h2>Lista expandible en php</h2>
     <a href="lista.php?mostrar=5">5 items</a>
