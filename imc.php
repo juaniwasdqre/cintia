@@ -8,41 +8,56 @@
 </head>
 <body>
     <h1>Calculadora de su Indice de Masa Corporal</h1> 
+
     <div class="formu">
+
         <div class="form-msg">
             <h2>INDICE DE MASA CORPORAL (IMC)</h2>
-            <p>IMC = PESO[kg] / ALTURA[m]</p>
+            <p>IMC = PESO[kg] / ALTURA[m]²</p>
         </div>
+
         <form action="imc.php" method="GET">
-            <input type="text" name="nombre" placeholder="Ingrese nombre..." class="form_input">
-            <input type="number" name="edad" placeholder="Ingrese edad..." class="form_input">
-            <input type="number" step="any" name="peso" placeholder="Ingrese su peso..." class="form_input">
-            <input type="number" step="any" name="altura" placeholder="Ingrese su altura" class="form_input">
+            <input type="text" name="nombre" placeholder="Ingrese nombre...">
+            <input type="number" name="edad" placeholder="Ingrese edad...">
+            <input type="number" name="peso" placeholder="Ingrese su peso..." step="any">
+            <input type="number" name="altura" placeholder="Ingrese su altura" step="any">
             
             <button type="submit" class="btn-subm">CALCULAR</button>
         </form>
     </div>
+
     <div class="rta">
         <h2>RESULTADO:</h2>
 
         <?php
+
 
         // $nombre = $_GET['nombre'];
         // $edad = $_GET['edad'];
         // $peso = $_GET['peso'];
         // $altura = $_GET['altura'];
 
+        //CHECKEO SI LOS CAMPOS DEL FORMULARIO NO ESTAN VACIOS
+        //SI ESTAN VACIOS, DEVUELVO UN MENSAJE DE ERROR!
         if (isset($_GET['nombre'])  && !empty($_GET['edad']) && !empty($_GET['peso']) && !empty($_GET['altura'])){
-            echo "<h3>" . round(($_GET['peso']/pow($_GET['altura'],2)),2) . "</h3>";
+
+            
+            echo "<h3>" . round(
+                            ($_GET['peso']/
+                            (($_GET['altura'])*($_GET['altura']))
+                            ),2) .
+                "</h3>";
             // la funcion round para redondear un numero a la cantidad de decimales deseados
+
             echo "<p>Nombre: $_GET[nombre]</p>
                 <p>Edad: $_GET[edad]</p>
                 <p>Peso: $_GET[peso]</p>
-                <p>Altura: $_GET[altura]</p>
-            ";
-            //prueba para git
+                <p>Altura: $_GET[altura]</p>";
+
+
         } else {
             echo "<h2>Error! completar todos los datos</h2>";
+            //MENSAJE DE ERROR! (cuando los campos estan vacios)
         }
         ?>
 
